@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <title>School</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" href="l_assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="l_assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="l_assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="l_assets/css/owl.theme.default.min.css">
+
+        <!-- MAIN CSS -->
+        <link rel="stylesheet" href="l_assets/css/templatemo-style.css">
+
+    </head>
+
+    <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+        <!-- PRE LOADER -->
+        <section class="preloader">
+            <div class="spinner">
+
+                <span class="spinner-rotate"></span>
+
+            </div>
+        </section>
+
+
+        <!-- MENU -->
+        <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon icon-bar"></span>
+                        <span class="icon icon-bar"></span>
+                        <span class="icon icon-bar"></span>
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+
+                    <a href="#" class="navbar-brand"><img class="img-responsive" src="l_assets/images/logo.png" src="" alt="logo"></a>
+                </div>
+
+                <!-- MENU LINKS -->
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-nav-first">
+                        <li class="active"><a href="#top" class="smoothScroll">Home</a></li>
+                        <li><a href="#about-us" class="smoothScroll">About</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Our Teachers</a>
+                            <ul class="dropdown-menu">
+                                <li><a target="_blank" href="{{ path('fos_user_registration_register', {role: 'teacher'}) }}">Register</a></li>
+                                <li><a target="_blank" href="{{ path('fos_user_security_login') }}">Login</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Our Students</a>
+                            <ul class="dropdown-menu">
+                                <li><a target="_blank" href="{{ path('fos_user_registration_register', {role: 'student'}) }}">Register</a></li>
+                                <li><a target="_blank" href="{{ path('fos_user_security_login') }}">Login</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#courses" class="smoothScroll">Courses</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Nimdi3 Classroom</a>
+                            <ul class="dropdown-menu">
+                                <li><a target="_blank" href="{{ path('fos_user_security_login') }}">Register</a></li>
+                                <li><a target="_blank" href="{{ path('fos_user_security_login') }}">Login</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#testimonial" class="smoothScroll">Reviews</a></li>
+                        <li><a href="#contact" class="smoothScroll">Contact</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><i class="fa fa-phone"></i> +65 2244 1100</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- HOME -->
+        <section id="home">
+            <div class="row">
+
+                <div class="owl-carousel owl-theme home-slider">
+                    <div class="item item-first">
+                        <div class="caption">
+                            <div class="container">
+                                <div class="col-md-6 col-sm-12">
+                                    <h1>Distance Learning Tuition centre</h1>
+                                    <h3>Virtual Learning platform…Learning from the comfort of your home….</h3>
+                                    <a href="#feature" class="section-btn btn btn-default smoothScroll">Discover more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item item-second">
+                        <div class="caption">
+                            <div class="container">
+                                <div class="col-md-6 col-sm-12">
+                                    <h1>One to one tuition</h1>
+                                    <h3>Unique experience of working with just the teacher</h3>
+                                    <a href="#courses" class="section-btn btn btn-default smoothScroll">Take a course</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item item-third">
+                        <div class="caption">
+                            <div class="container">
+                                <div class="col-md-6 col-sm-12">
+                                    <h1>One to five tuition</h1>
+                                    <h3>Unique experience of sharing your learning through discussion with other students <a href="#" target="_parent">templatemo</a> page.</h3>
+                                    <a href="#contact" class="section-btn btn btn-default smoothScroll">Let's chat</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item-second">
+                        <div class="caption">
+                            <div class="container">
+                                <div class="col-md-6 col-sm-12">
+                                    <h1>Nimdi3 classroom</h1>
+                                    <h3>Bringing the classroom and the teacher together in the own environment…</h3>
+                                    <a href="#courses" class="section-btn btn btn-default smoothScroll">Take a course</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ABOUT-section -->
+        <section id="about-us">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12 col-sm-12">
+                        <div class="section-content">
+                            <h5>Nimdi3 is a tuition company aimed at helping every child to achieve their maximum potential by assessing their needs against the national curriculum, identifying gaps in in their knowledge and put a personalised action plan in place to address the gaps. We provide tuition at our centres as well as direct online tuition in the comfort of your homes.</h5>
+
+                            <h5>Students are able to register, select topics from our bespoke courses, complete an online assessment or submit a list of topics they would like to be taught. Student’s complete online test after every session which gives instant feedback on the content covered.</h5>
+
+                            <h5>Our registered teachers are all CRB checked. A brief profile of some of our teachers states their areas of speciality. Teachers are able to work from the comfort of their homes using are quality assured resources deliver and set work for students.</h5>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ABOUT -->
+        <section id="about">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <h2 class="text-center mb-4">Start your journey to a better life with<br>online practical courses</h2>
+                    </div>
+                    <div class="about-info">
+
+                        <div class="col-md-4 text-center">
+                            <figure>
+
+                                <span><i class="fa fa-users"></i></span>
+
+                                <figcaption>
+                                    <h3>Courses</h3>
+                                    <p>11 plus programme</p>
+                                    <p>GCSE programme</p>
+                                    <p>A Level programme</p>
+
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-md-4 text-center">
+
+
+
+                            <figure>
+                                <span><i class="fa fa-certificate"></i></span>
+                                <figcaption>
+                                    <h3>Online Assessment</h3>
+                                    <p>Personalised tests</p>
+                                    <p>Report from tests</p>
+                                    <p>Recommended tuition hours</p>
+
+                                </figcaption>
+                            </figure>
+
+
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <figure>
+                                <span><i class="fa fa-bar-chart-o"></i></span>
+                                <figcaption>
+                                    <h3>Delivery</h3>
+                                    <p>One to one</p>
+                                    <p>One to five</p>
+                                    <p>Nimdi3 tuition</p>
+
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <!-- FEATURE -->
+        <section id="feature">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature-thumb">
+                            <span>01</span>
+                            <h3>11 plus programme</h3>
+                            <p>The 11plus course covers contents for thevarious 11 plus entry exams across theUnited Kingdom. Some of these coursesinclude Medway Exam, Kent Exam, BexleyExam etc</p>
+                            <a href="{{ path('page') }}"><button>Learn more</button></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature-thumb">
+                            <span>02</span>
+                            <h3>GCSE programme</h3>
+                            <p>This has two parts: the key stage 3 contentand the key stage 4 content. The Key stage 3course provides students with conceptualunderstanding in the various subjects acrossthe national curriculum. The Key Stage 4course builds the skills that students need toexcel to the best of their ability in any coursethat they sign up to.</p>
+                            <a href="{{ path('page') }}"><button>Learn more</button></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature-thumb">
+                            <span>03</span>
+                            <h3>A Level programme</h3>
+                            <p>The A level course builds on the grit and skillsour students need to excel in theirpreparation to excel in their A level subjects.</p>
+                            <a href="{{ path('page') }}"><button>Learn more</button></a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row future-sec">
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature-thumb">
+                            <span>01</span>
+                            <h3>Personalised Tests</h3>
+                            <p>Based on the needs of the students, their agegroup and their subjects on registration, anonline initial assessment test is set andstudents complete the test. These tests aredesigned to elicit students conceptualunderstanding of the items being examined.</p>
+                            <a href="{{ path('page') }}"><button>Learn more</button></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature-thumb">
+                            <span>02</span>
+                            <h3>Report From Tests</h3>
+                            <p>The results from the tests are used togenerate a report for the parents to be awareof the specific needs of the student, what is tobe included in the action plan for eachstudent and the timeline for the contentdelivery. This information is only accessible tothe student, parents and nimdi3.</p>
+                            <a href="{{ path('page') }}"><button>Learn more</button></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature-thumb">
+                            <span>03</span>
+                            <h3>Recommended Tuition Hours</h3>
+                            <p>The recommended hours of tuition is basedon the needs of the students as identifiedfrom the online assessment. This is usuallyagreed with the parents and students areexpected to attend all agreed sessions orarrange for alternative make up time whenthey miss the agreed sessions.</p>
+                            <a href="{{ path('page') }}"><button>Learn more</button></a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row future-sec-two">
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature-thumb">
+                            <span>01</span>
+                            <h3>One to One</h3>
+                            <p>One to one tuition could be as a result of arecommendation from the centre or a requestfrom parents. The students gets theopportunity to have a personalised time withthe tutor. The student is able to learn at theirown pace and the teacher is able to assessthe progress through personalised questionsin the course of their learning.</p>
+                            <a href="{{ path('page') }}"><button>Learn more</button></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature-thumb">
+                            <span>02</span>
+                            <h3>One to Five</h3>
+                            <p>Students of similar ability and same needs asidentified from the assessment work togetherwith the tutor. They are able to share ideas,discuss questions with their peers and benefitfrom the questions asked by their peers.There is also the opportunity for peerassessment and relationship building to boostthe students confidence during and after thesessions.</p>
+                            <a href="{{ path('page') }}"><button>Learn more</button></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature-thumb">
+                            <span>03</span>
+                            <h3>Nimdi3</h3>
+                            <p>This is a fully online tuition involving one ormore students working with a tutor. Thestudents access the material online, tutordelivers the lesson via video and studentshave the opportunity to ask and answerquestions. This is a virtual classroomexperience which brings both the student andthe teacher together on the same platform.Teachers benefit from working from thecomfort of their homes, saving traveling time. Students also benefit from working in their own environment and parents are able tomonitor the students learning. Parents savetraveling time for transporting students to andfrom the tuition centre.</p>
+                            <a href="{{ path('page') }}"><button>Learn more</button></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TEAM -->
+        <section id="team">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12 col-sm-12">
+                        <div class="section-title">
+                            <h2>Teachers <small>Meet Professional Trainers</small></h2>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 rotate">
+                        <div class="card text-center mb-3 book-card mx-auto">
+
+                            <div class="card-body">
+                                <img src="l_assets/images/author-image1.jpg" class="img-responsive" alt="">
+                            </div>
+
+                            <div class="back">
+                                <div class="back-content">
+                                    <div class="team-info">
+                                        <h3>Name….</h3>
+                                        <h6>Years of experience….</h6>
+                                        <h6>Main subjects …..</h6>
+                                        <h6>Subsidiary subjects…..</h6>
+                                        <span>Key achievements in students results….not more than 500words!</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 rotate">
+                        <div class="card text-center mb-3 book-card mx-auto">
+
+                            <div class="card-body">
+                                <img src="l_assets/images/author-image2.jpg" class="img-responsive" alt="">
+                            </div>
+
+                            <div class="back">
+                                <div class="back-content">
+                                    <div class="team-info">
+                                        <h3>Name….</h3>
+                                        <h6>Years of experience….</h6>
+                                        <h6>Main subjects …..</h6>
+                                        <h6>Subsidiary subjects…..</h6>
+                                        <span>Key achievements in students results….not more than 500words!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 rotate">
+                        <div class="card text-center mb-3 book-card mx-auto">
+
+                            <div class="card-body">
+                                <img src="l_assets/images/author-image3.jpg" class="img-responsive" alt="">
+                            </div>
+
+                            <div class="back">
+                                <div class="back-content">
+                                    <div class="team-info">
+                                        <h3>Name….</h3>
+                                        <h6>Years of experience….</h6>
+                                        <h6>Main subjects …..</h6>
+                                        <h6>Subsidiary subjects…..</h6>
+                                        <span>Key achievements in students results….not more than 500words!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 rotate">
+                        <div class="card text-center mb-3 book-card mx-auto">
+
+                            <div class="card-body">
+                                <img src="l_assets/images/author-image4.jpg" class="img-responsive" alt="">
+                            </div>
+
+                            <div class="back">
+                                <div class="back-content">
+                                    <div class="team-info">
+                                        <h3>Name….</h3>
+                                        <h6>Years of experience….</h6>
+                                        <h6>Main subjects …..</h6>
+                                        <h6>Subsidiary subjects…..</h6>
+                                        <span>Key achievements in students results….not more than 500words!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Courses -->
+        <section id="courses">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12 col-sm-12">
+                        <div class="section-title">
+                            <h2>Popular Courses <small>Upgrade your skills with newest courses</small></h2>
+                        </div>
+
+                        <div class="owl-carousel owl-theme owl-courses">
+                            <div class="col-md-4 col-sm-4">
+                                <div class="item">
+                                    <div class="courses-thumb">
+                                        <div class="courses-top">
+                                            <div class="courses-image">
+                                                <img src="l_assets/images/courses-image1.jpg" class="img-responsive" alt="">
+                                            </div>
+                                            <div class="courses-date">
+                                                <span><i class="fa fa-calendar"></i> 12 / 7 / 2018</span>
+                                                <span><i class="fa fa-clock-o"></i> 7 Hours</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="courses-detail">
+                                            <h3><a href="#">Social Media Management</a></h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+
+                                        <div class="courses-info">
+                                            <div class="courses-author">
+                                                <img src="l_assets/images/author-image1.jpg" class="img-responsive" alt="">
+                                                <span>Mark Wilson</span>
+                                            </div>
+                                            <div class="courses-price">
+                                                <a href="#"><span>USD 25</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4">
+                                <div class="item">
+                                    <div class="courses-thumb">
+                                        <div class="courses-top">
+                                            <div class="courses-image">
+                                                <img src="l_assets/images/courses-image2.jpg" class="img-responsive" alt="">
+                                            </div>
+                                            <div class="courses-date">
+                                                <span><i class="fa fa-calendar"></i> 20 / 7 / 2018</span>
+                                                <span><i class="fa fa-clock-o"></i> 4.5 Hours</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="courses-detail">
+                                            <h3><a href="#">Graphic & Web Design</a></h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+
+                                        <div class="courses-info">
+                                            <div class="courses-author">
+                                                <img src="l_assets/images/author-image2.jpg" class="img-responsive" alt="">
+                                                <span>Jessica</span>
+                                            </div>
+                                            <div class="courses-price">
+                                                <a href="#"><span>USD 80</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4">
+                                <div class="item">
+                                    <div class="courses-thumb">
+                                        <div class="courses-top">
+                                            <div class="courses-image">
+                                                <img src="l_assets/images/courses-image3.jpg" class="img-responsive" alt="">
+                                            </div>
+                                            <div class="courses-date">
+                                                <span><i class="fa fa-calendar"></i> 15 / 8 / 2018</span>
+                                                <span><i class="fa fa-clock-o"></i> 6 Hours</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="courses-detail">
+                                            <h3><a href="#">Marketing Communication</a></h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+
+                                        <div class="courses-info">
+                                            <div class="courses-author">
+                                                <img src="l_assets/images/author-image3.jpg" class="img-responsive" alt="">
+                                                <span>Catherine</span>
+                                            </div>
+                                            <div class="courses-price free">
+                                                <a href="#"><span>Free</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4">
+                                <div class="item">
+                                    <div class="courses-thumb">
+                                        <div class="courses-top">
+                                            <div class="courses-image">
+                                                <img src="l_assets/images/courses-image4.jpg" class="img-responsive" alt="">
+                                            </div>
+                                            <div class="courses-date">
+                                                <span><i class="fa fa-calendar"></i> 10 / 8 / 2018</span>
+                                                <span><i class="fa fa-clock-o"></i> 8 Hours</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="courses-detail">
+                                            <h3><a href="#">Summer Kids</a></h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+
+                                        <div class="courses-info">
+                                            <div class="courses-author">
+                                                <img src="l_assets/images/author-image1.jpg" class="img-responsive" alt="">
+                                                <span>Mark Wilson</span>
+                                            </div>
+                                            <div class="courses-price">
+                                                <a href="#"><span>USD 45</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4">
+                                <div class="item">
+                                    <div class="courses-thumb">
+                                        <div class="courses-top">
+                                            <div class="courses-image">
+                                                <img src="l_assets/images/courses-image5.jpg" class="img-responsive" alt="">
+                                            </div>
+                                            <div class="courses-date">
+                                                <span><i class="fa fa-calendar"></i> 5 / 10 / 2018</span>
+                                                <span><i class="fa fa-clock-o"></i> 10 Hours</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="courses-detail">
+                                            <h3><a href="#">Business &amp; Management</a></h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+
+                                        <div class="courses-info">
+                                            <div class="courses-author">
+                                                <img src="l_assets/images/author-image2.jpg" class="img-responsive" alt="">
+                                                <span>Jessica</span>
+                                            </div>
+                                            <div class="courses-price free">
+                                                <a href="#"><span>Free</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+        </section>
+
+
+        <!-- TESTIMONIAL -->
+        <section id="testimonial">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12 col-sm-12">
+                        <div class="section-title">
+                            <h2>Student Reviews <small>from around the world</small></h2>
+                        </div>
+
+                        <div class="owl-carousel owl-theme owl-client">
+                            <div class="col-md-4 col-sm-4">
+                                <div class="item">
+                                    <div class="tst-image">
+                                        <img src="l_assets/images/tst-image1.jpg" class="img-responsive" alt="">
+                                    </div>
+                                    <div class="tst-author">
+                                        <h4>Jackson</h4>
+                                        <span>Shopify Developer</span>
+                                    </div>
+                                    <p>You really do help young creative minds to get quality education and professional job search assistance. I’d recommend it to everyone!</p>
+                                    <div class="tst-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4">
+                                <div class="item">
+                                    <div class="tst-image">
+                                        <img src="l_assets/images/tst-image2.jpg" class="img-responsive" alt="">
+                                    </div>
+                                    <div class="tst-author">
+                                        <h4>Camila</h4>
+                                        <span>Marketing Manager</span>
+                                    </div>
+                                    <p>Trying something new is exciting! Thanks for the amazing law course and the great teacher who was able to make it interesting.</p>
+                                    <div class="tst-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4">
+                                <div class="item">
+                                    <div class="tst-image">
+                                        <img src="l_assets/images/tst-image3.jpg" class="img-responsive" alt="">
+                                    </div>
+                                    <div class="tst-author">
+                                        <h4>Barbie</h4>
+                                        <span>Art Director</span>
+                                    </div>
+                                    <p>Donec erat libero, blandit vitae arcu eu, lacinia placerat justo. Sed sollicitudin quis felis vitae hendrerit.</p>
+                                    <div class="tst-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4">
+                                <div class="item">
+                                    <div class="tst-image">
+                                        <img src="l_assets/images/tst-image4.jpg" class="img-responsive" alt="">
+                                    </div>
+                                    <div class="tst-author">
+                                        <h4>Andrio</h4>
+                                        <span>Web Developer</span>
+                                    </div>
+                                    <p>Nam eget mi eu ante faucibus viverra nec sed magna. Vivamus viverra sapien ex, elementum varius ex sagittis vel.</p>
+                                    <div class="tst-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+        </section>
+
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-6 col-sm-12">
+                        <form id="contact-form" role="form" action="" method="post">
+                            <div class="section-title">
+                                <h2>Contact us <small>we love conversations. let us talk!</small></h2>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12">
+                                <input type="text" class="form-control" placeholder="Enter full name" name="name" required="">
+
+                                <input type="email" class="form-control" placeholder="Enter email address" name="email" required="">
+
+                                <textarea class="form-control" rows="6" placeholder="Tell us about your message" name="message" required=""></textarea>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <input type="submit" class="form-control" name="send message" value="Send Message">
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div class="contact-image">
+                            <img src="l_assets/images/contact-image.jpg" class="img-responsive" alt="Smiling Two Girls">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-4 col-sm-6">
+                        <div class="footer-info">
+                            <div class="section-title">
+                                <h2>Headquarter</h2>
+                            </div>
+                            <address>
+                                <p>1800 dapibus a tortor pretium,<br> Integer nisl dui, ABC 12000</p>
+                            </address>
+
+                            <ul class="social-icon">
+                                <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                                <li><a href="#" class="fa fa-twitter"></a></li>
+                                <li><a href="#" class="fa fa-instagram"></a></li>
+                            </ul>
+
+                            <div class="copyright-text">
+                                <p>Copyright &copy; 2018 Company</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6">
+                        <div class="footer-info">
+                            <div class="section-title">
+                                <h2>Contact Info</h2>
+                            </div>
+                            <address>
+                                <p>+65 2244 1100, +66 1800 1100</p>
+                                <p><a href="mailto:youremail.com">hello@youremail.co</a></p>
+                            </address>
+
+                            <div class="footer_menu">
+                                <h2>Quick Links</h2>
+                                <ul>
+                                    <li><a href="#">Career</a></li>
+                                    <li><a href="#">Investor</a></li>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="#">Refund Policy</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12">
+                        <div class="footer-info newsletter-form">
+                            <div class="section-title">
+                                <h2>Newsletter Signup</h2>
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <form action="#" method="get">
+                                        <input type="email" class="form-control" placeholder="Enter your email" name="email" id="email" required="">
+                                        <input type="submit" class="form-control" name="submit" id="form-submit" value="Send me">
+                                    </form>
+                                    <span><sup>*</sup> Please note - we do not spam your email.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+
+        <!-- SCRIPTS -->
+        <script src="l_assets/js/jquery.js"></script>
+        <script src="l_assets/js/bootstrap.min.js"></script>
+        <script src="l_assets/js/owl.carousel.min.js"></script>
+        <script src="l_assets/js/smoothscroll.js"></script>
+        <script src="l_assets/js/custom.js"></script>
+
+    </body>
+
+</html>

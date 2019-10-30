@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block sidebar %}
+    {% if 'ROLE_TEACHER' in app.user.roles %}
+        {% include "teacher/_sidebar.html.twig" %}
+    {% elseif 'ROLE_STUDENT' in app.user.roles %}
+        {% include "student/_sidebar.html.twig" %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% include "@FOSUser/Profile/show_content.html.twig" %}
+{% endblock %}

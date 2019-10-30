@@ -1,0 +1,21 @@
+fos_user:
+    db_driver: orm
+    user_class: App\Entity\User
+    firewall_name: main
+    from_email:
+        address: "%mail_sender%"
+        sender_name: "%site_name%"
+    registration:
+        confirmation:
+            enabled: true
+        form:
+            type: App\Form\RegistrationType
+    profile:
+        form:
+            type: App\Form\ProfileType
+            
+services:      
+    app.form.profile:
+        class: App\Form\ProfileType
+        tags:
+            - { name: form.type, alias: app_user_profile }

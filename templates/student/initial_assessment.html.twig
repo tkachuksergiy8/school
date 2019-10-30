@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Initial assessment{% endblock %}
+
+{% block breadcrumbs %}
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Initial assessment</li>
+    </ol>
+{% endblock %}
+
+{% block sidebar %}
+    {% include "student/_sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+    <h1>Initial assessment</h1>
+    <hr>
+
+    {% if student.initialAssessment %}
+        <p>On the Initial assessment you scored {{ student.initialAssessment }} points</p>
+    {% else %}
+        <form method="post" name="test">
+            {% for question in test.questions %}
+                <fieldset class="form-group">
+                    <div class="row">
+                        <legend class="col-form-label col-sm-2 pt-0">{{ question }}</legend>
+                        <div class="col-sm-10">
+                            {% for answer in question.answers %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="test[{{ question.id }}]" id="id-{{ answer.id }}" value="{{ answer.id }}" required>
+                                    <label class="form-check-label" for="id-{{ answer.id }}">
+                                        {{ answer }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </fieldset>
+            {% endfor %}
+            <input type="hidden" name="token" value="{{ csrf_token('initial-test') }}">
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    {% endif %}
+{% endblock %}

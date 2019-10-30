@@ -1,0 +1,105 @@
+sonata_block:
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+        sonata.admin.block.search_result:
+        sonata.admin.block.stats:
+        sonata.block.service.text:
+        
+sonata_admin:
+    title: 'Online school'
+    dashboard:
+        blocks:
+            - { type: sonata.admin.block.admin_list, position: left, settings: { groups: [admin.group.study] } }
+            - { type: sonata.admin.block.admin_list, position: right, settings: { groups: [admin.group.test] } }
+            -
+                class:    col-xs-12
+                position: top
+                type: sonata.block.service.text
+                settings:
+                    content:
+                        <div class='panel panel-default'>
+                            <div class='panel-heading'>
+                                <h3 class='panel-title'>Welcome!</h3>
+                            </div>
+                            <div class='panel-body'>
+                                Welcome to School admin panel
+                            </div>
+                        </div>
+#            -
+#                class:    col-lg-4 col-xs-12
+#                position: top
+#                type:     sonata.admin.block.stats
+#                settings:
+#                    code: admin.lesson
+#                    icon: fa fa-briefcase
+#                    text: app.page.stats              # colors: bg-green, bg-red, bg-aqua and bg-yellow
+#                    color: bg-green
+#                    filters:
+#                        role: { value: 1 }
+        groups:
+            admin.group.study:
+                icon: '<i class="fa fa-gift"></i>'
+                label: Study
+                items:
+                    - admin.session
+                    - admin.lesson     
+                    - admin.subject
+            admin.group.test:
+                icon: '<i class="fa fa-align-left"></i>'
+                label: Tests
+                items:
+                    - admin.test
+            admin.group.users:
+                icon: '<i class="fa fa-user"></i>'
+                label: Users
+                items:
+                    - admin.user
+
+services:
+    admin.user:
+        class: App\Admin\UserAdmin
+        arguments: [~, App\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Users }
+        calls:
+            - [ setUserManager, ['@fos_user.user_manager']]
+    admin.subject:
+        class: App\Admin\SubjectAdmin
+        arguments: [~, App\Entity\Subject, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Subjects }
+    admin.lesson:
+        class: App\Admin\LessonAdmin
+        arguments: [~, App\Entity\Lesson, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Lessons }
+    admin.session:
+        class: App\Admin\SessionAdmin
+        arguments: [~, App\Entity\Session, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Sessions }
+        calls:
+            - [addChild, ['@admin.shedule']]
+    admin.shedule:
+        class: App\Admin\SheduleAdmin
+        arguments: [~, App\Entity\Shedule, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Shedules }
+    admin.test:
+        class: App\Admin\TestAdmin
+        arguments: [~, App\Entity\Test, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Tests }
+        calls:
+            - [addChild, ['@admin.test.question']]
+    admin.test.question:
+        class: App\Admin\TestQuestionAdmin
+        arguments: [~, App\Entity\TestQuestion, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Test questions }
+    admin.test.answer:
+        class: App\Admin\TestAnswerAdmin
+        arguments: [~, App\Entity\TestAnswer, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Test questions }

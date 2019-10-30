@@ -1,0 +1,43 @@
+@import "~bootstrap/scss/bootstrap";
+
+.body{
+    background: url('/media/img/school-bg.jpg');
+    background-size:cover;
+}
+.container{
+    height: 100vh;
+}
+.row{
+    height: 100%
+}
+.login-form{
+    background: #eeeeee8a;
+}
+input[type='text'],
+input[type='password'],
+input[type='email']{
+    background-color: #eeeeee8a!important;
+}
+.remember_me-label{
+    color: #6d6d6d;
+}
+.label-placeholder{
+    position: absolute;
+    z-index: 3;
+    font-size: 100%;
+    top: 63%;
+    left: 10px;
+    transform: translateY(-50%);
+    transition: 0.2s;
+    color: #6d6d6d;
+}
+.with-label-placeholder:focus + .label-placeholder,
+.with-label-placeholder:valid + .label-placeholder{
+    transform: none;
+    font-size: 16px;
+    /*    color:#fff;*/
+}
+.with-label-placeholder:focus + .label-placeholder.top,
+.with-label-placeholder:valid + .label-placeholder.top{
+    top: -20px;
+}

@@ -1,0 +1,23 @@
+{% block breadcrumbs %}
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ path('student') }}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">My profile</li>
+    </ol>
+{% endblock %}
+
+<div class="page-header bordered">
+    <h1>Manage your public profile</h1>
+</div>
+{% if user.photo %}
+    <img src="{{ asset(user.photo|imagine_filter('avatar')) }}" alt="{{ user }}" title="{{ user }}" class="mb-2"/>
+{% endif %}
+<p><strong>Username:</strong> {{ user.username }}</p>
+<p><strong>Email:</strong> {{ user.email }}</p>
+<p><strong>First name:</strong> {{ user.firstName }}</p>
+<p><strong>Last name:</strong> {{ user.lastName }}</p>
+<p><strong>About:</strong> {{ user.about }}</p>
+
+<a href="{{ path('fos_user_profile_edit') }}" class="btn btn-lg btn-primary">Edit profile</a>

@@ -1,0 +1,60 @@
+{% block breadcrumbs %}
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ path('student') }}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Edit my profile</li>
+    </ol>
+{% endblock %}
+
+<div class="page-header bordered">
+    <h1>Edit profile</h1>
+</div>
+{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+<div class="form-group">
+    {% if form.vars.value.photo is not null %}
+        <img src="{{ asset(form.vars.value.photo|imagine_filter('avatar')) }}" alt="user avatar" title="user avatar" class="mb-2"/>
+    {% endif %}
+    {{ form_row(form.photo) }}
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_row(form.username, {attr:{'class':'form-control form-control-lg'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_row(form.email, {attr:{'class':'form-control form-control-lg'}}) }}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_row(form.firstName) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="form-group">
+                {{ form_row(form.lastName) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    {{ form_row(form.about) }}
+</div>
+<div class="form-group">
+    {{ form_row(form.current_password, {attr:{'class':'form-control form-control-lg'}}) }}
+</div>
+<div class="form-group action">
+    <button type="submit" class="btn btn-lg btn-primary">Save</button>
+    <a href="{{ path('fos_user_profile_show') }}" class="btn btn-lg btn-light">cancel</a>
+</div>
+
+{{ form_end(form) }}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Initial assessment result{% endblock %}
+
+{% block breadcrumbs %}
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Initial assessment result</li>
+    </ol>
+{% endblock %}
+
+{% block sidebar %}
+    {% include "student/_sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+    <h1>Initial assessment result</h1>
+    <hr>
+    <p>On the Initial assessment you scored {{ result }} points</p>
+{% endblock %}
