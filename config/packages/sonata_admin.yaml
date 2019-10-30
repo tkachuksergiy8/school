@@ -50,6 +50,8 @@ sonata_admin:
                 label: Tests
                 items:
                     - admin.test
+                    - admin.session.test
+                    - admin.initial.test
             admin.group.users:
                 icon: '<i class="fa fa-user"></i>'
                 label: Users
@@ -91,6 +93,20 @@ services:
         arguments: [~, App\Entity\Test, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Tests }
+        calls:
+            - [addChild, ['@admin.test.question']]
+    admin.session.test:
+        class: App\Admin\TestAdmin
+        arguments: [~, App\Entity\SessionTest, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Session test }
+        calls:
+            - [addChild, ['@admin.test.question']]
+    admin.initial.test:
+        class: App\Admin\TestAdmin
+        arguments: [~, App\Entity\InitialTest, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Initial test }
         calls:
             - [addChild, ['@admin.test.question']]
     admin.test.question:

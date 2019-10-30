@@ -25,6 +25,11 @@ class TestQuestion
     private $question;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Test", inversedBy="questions")
+     */
+    private $test;
+
+    /**
      * @ORM\ManyToOne(targetEntity="SessionTest", inversedBy="questions")
      */
     private $sessionTest;
@@ -135,6 +140,18 @@ class TestQuestion
     public function setInitialTest(?InitialTest $initialTest): self
     {
         $this->initialTest = $initialTest;
+
+        return $this;
+    }
+
+    public function getTest(): ?Test
+    {
+        return $this->test;
+    }
+
+    public function setTest(?Test $test): self
+    {
+        $this->test = $test;
 
         return $this;
     }

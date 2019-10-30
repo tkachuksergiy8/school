@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\{
     AbstractAdmin,
     AdminInterface
 };
+use App\Entity\SessionTest;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Knp\Menu\ItemInterface as MenuItemInterface;
@@ -19,18 +20,10 @@ class TestAdmin extends AbstractAdmin
     {
         $test = $this->getSubject();
 
-        $formMapper
-                ->add('title')
-                ->add('type', ChoiceType::class, [
-                    'choices' => [
-                        Test::TYPE_INITIAL => Test::TYPE_INITIAL,
-                        Test::TYPE_SESSION => Test::TYPE_SESSION
-                    ]
-                ])
-        ;
+        $formMapper->add('title');
 
         if ($test->getId()) {
-            if ($test->getType() == Test::TYPE_SESSION) {
+            if ($test instanceof SessionTest) {
                 $formMapper->add('session');
             }
         } else {
