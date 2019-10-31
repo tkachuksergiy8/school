@@ -24,7 +24,7 @@
         <p>On the Initial assessment you scored {{ student.initialAssessment }} points</p>
     {% else %}
         <form method="post" name="test">
-            {% for question in test.questions %}
+            {% for question in questions %}
                 <fieldset class="form-group">
                     <div class="row">
                         <legend class="col-form-label col-sm-2 pt-0">{{ question }}</legend>

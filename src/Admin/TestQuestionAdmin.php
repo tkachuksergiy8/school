@@ -2,6 +2,7 @@
 
 namespace App\Admin;
 
+use App\Entity\SessionTest;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -10,8 +11,6 @@ use Sonata\Form\Type\CollectionType;
 
 class TestQuestionAdmin extends AbstractAdmin
 {
-
-    protected $parentAssociationMapping = 'test';
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -45,6 +44,17 @@ class TestQuestionAdmin extends AbstractAdmin
     public function toString($question)
     {
         return $question->getQuestion();
+    }
+
+    public function getParentAssociationMapping()
+    {
+        $className = $this->getParent()->getClass();
+
+        if ($className === SessionTest::class) {
+            return 'sessionTest';
+        }
+
+        return 'initialTest';
     }
 
 }

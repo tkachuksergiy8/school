@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\TestQuestion;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Test;
 
@@ -15,27 +16,27 @@ class TestService
         $this->em = $em;
     }
 
-    public function getResult($test, array $input)
+    public function getResult($questions, array $input)
     {
-        if (is_int($test)) {
-            $test = $this->getTest($test);
-        }
+        $correctAnswers = array();
 
-        $questions = $test->getQuestions();
-
-        $points = $questions->map(function($question) use ($input) {
+        foreach ($questions as $question) {
             $correct = $question->getAnswers()->filter(function($answer) {
                 return $answer->getCorrect();
             })->first();
 
-            if ($input[$question->getId()] == $correct->getId()) {
-                return $question->getPoints();
-            }
+            $correctAnswers[$question->getId()] = $correct->getId();
+        }
 
-            return 0;
+        $answers = array_intersect_assoc($correctAnswers, $input);
+
+        $testQuestion = $this->em->getRepository(TestQuestion::class);
+
+        array_walk($answers, function (&$item, $key) use ($testQuestion){
+            $item = $testQuestion->find($key)->getPoints();
         });
 
-        return array_sum($points->toArray());
+        return array_sum($answers);
     }
 
     private function getTest(int $testId): Test

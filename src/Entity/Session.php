@@ -54,6 +54,11 @@ class Session
      */
     private $tests;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Student", inversedBy="sessions")
+     */
+    private $student;
+
     public function __construct()
     {
         $this->shedules = new ArrayCollection();
@@ -188,6 +193,18 @@ class Session
                 $test->setSession(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStudent(): ?Student
+    {
+        return $this->student;
+    }
+
+    public function setStudent(?Student $student): self
+    {
+        $this->student = $student;
 
         return $this;
     }

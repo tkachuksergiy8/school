@@ -9,11 +9,7 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use App\Repository\{
-    TestRepository,
-    SessionRepository,
-    StudentRepository
-};
+use App\Repository\{InitialTestRepository, TestRepository, SessionRepository, StudentRepository};
 use App\Entity\Test;
 use App\Service\TestService;
 
@@ -35,9 +31,15 @@ class StudentController extends AbstractController
     /**
      * @Route("initial-assessment", name="student_initial_assessment")
      */
-    public function initialAssessment(Request $request, TestRepository $testRepo, StudentRepository $studentRepo, TestService $testService): Response
+    public function initialAssessment(Request $request, InitialTestRepository $testRepo, StudentRepository $studentRepo, TestService $testService): Response
     {
-        $test = $testRepo->findOneBy(['type' => Test::TYPE_INITIAL]);
+        $questions = array();
+
+        foreach ($testRepo->findAll() as $item) {
+            $values = $item->getQuestions();
+            array_push($questions, ...$values);
+        }
+
         $student = $studentRepo->findOneBy(['user' => $this->getUser()]);
 
         if (!$student) {
@@ -49,16 +51,17 @@ class StudentController extends AbstractController
                 return new Response('You are the bot');
             }
 
-            $result = $testService->getResult($test, $request->get('test'));
+            $result = $testService->getResult($questions, $request->get('test'));
             $student->setInitialAssessment($result);
+            $student->setInitialAnswers(serialize($request->get('test')));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('student_initial_assessment');
         }
 
         return $this->render('student/initial_assessment.html.twig', [
-                    'test' => $test,
-                    'student' => $student
+            'questions' => $questions,
+            'student' => $student
         ]);
     }
 
@@ -99,10 +102,8 @@ class StudentController extends AbstractController
     {
         $student = $studentRepo->findOneBy(['user' => $this->getUser()]);
 
-
-
         return $this->render('student/sessions.html.twig', [
-                    'sessions' => $student->getBuyedSessions()
+                    'sessions' => $student->getSessions()
         ]);
     }
 

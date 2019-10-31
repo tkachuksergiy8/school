@@ -31,6 +31,11 @@ class Student
     private $initialAssessment;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $initialAnswers;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Session")
      * @ORM\JoinTable(name="student_buyed_sessions")
      */
@@ -42,10 +47,16 @@ class Student
      */
     private $completedSessions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Session", mappedBy="student")
+     */
+    private $sessions;
+
     public function __construct()
     {
         $this->buyedSessions = new ArrayCollection();
         $this->completedSessions = new ArrayCollection();
+        $this->sessions = new ArrayCollection();
     }
 
     public function __toString()
@@ -130,6 +141,49 @@ class Student
         if ($this->completedSessions->contains($completedSession)) {
             $this->completedSessions->removeElement($completedSession);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Session[]
+     */
+    public function getSessions(): Collection
+    {
+        return $this->sessions;
+    }
+
+    public function addSession(Session $session): self
+    {
+        if (!$this->sessions->contains($session)) {
+            $this->sessions[] = $session;
+            $session->setStudent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSession(Session $session): self
+    {
+        if ($this->sessions->contains($session)) {
+            $this->sessions->removeElement($session);
+            // set the owning side to null (unless already changed)
+            if ($session->getStudent() === $this) {
+                $session->setStudent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getInitialAnswers(): ?string
+    {
+        return $this->initialAnswers;
+    }
+
+    public function setInitialAnswers(?string $initialAnswers): self
+    {
+        $this->initialAnswers = $initialAnswers;
 
         return $this;
     }
