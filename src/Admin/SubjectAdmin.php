@@ -16,7 +16,7 @@ class SubjectAdmin extends AbstractAdmin
     {
         $formMapper
                 ->add('title')
-                ->add('teachers')
+                ->add('mainSubjectsTeachers')
         ;
     }
 
