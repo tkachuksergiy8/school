@@ -29,14 +29,22 @@ class Subject
     private $lessons;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Teacher", inversedBy="subjects")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Teacher", inversedBy="mainSubjects")
      */
-    private $teachers;
+    private $mainSubjectsTeachers;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Teacher", inversedBy="subSubjects")
+     * @ORM\JoinTable(name="subsubject_teacher")
+     */
+    private $subSubjectsTeachers;
 
     public function __construct()
     {
         $this->lessons = new ArrayCollection();
         $this->teachers = new ArrayCollection();
+        $this->mainSubjectsTeachers = new ArrayCollection();
+        $this->subSubjectsTeachers = new ArrayCollection();
     }
 
     public function __toString()
@@ -95,24 +103,50 @@ class Subject
     /**
      * @return Collection|Teacher[]
      */
-    public function getTeachers(): Collection
+    public function getMainSubjectsTeachers(): Collection
     {
-        return $this->teachers;
+        return $this->mainSubjectsTeachers;
     }
 
-    public function addTeacher(Teacher $teacher): self
+    public function addMainSubjectsTeacher(Teacher $mainSubjectsTeacher): self
     {
-        if (!$this->teachers->contains($teacher)) {
-            $this->teachers[] = $teacher;
+        if (!$this->mainSubjectsTeachers->contains($mainSubjectsTeacher)) {
+            $this->mainSubjectsTeachers[] = $mainSubjectsTeacher;
         }
 
         return $this;
     }
 
-    public function removeTeacher(Teacher $teacher): self
+    public function removeMainSubjectsTeacher(Teacher $mainSubjectsTeacher): self
     {
-        if ($this->teachers->contains($teacher)) {
-            $this->teachers->removeElement($teacher);
+        if ($this->mainSubjectsTeachers->contains($mainSubjectsTeacher)) {
+            $this->mainSubjectsTeachers->removeElement($mainSubjectsTeacher);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Teacher[]
+     */
+    public function getSubSubjectsTeachers(): Collection
+    {
+        return $this->subSubjectsTeachers;
+    }
+
+    public function addSubSubjectsTeacher(Teacher $subSubjectsTeacher): self
+    {
+        if (!$this->subSubjectsTeachers->contains($subSubjectsTeacher)) {
+            $this->subSubjectsTeachers[] = $subSubjectsTeacher;
+        }
+
+        return $this;
+    }
+
+    public function removeSubSubjectsTeacher(Teacher $subSubjectsTeacher): self
+    {
+        if ($this->subSubjectsTeachers->contains($subSubjectsTeacher)) {
+            $this->subSubjectsTeachers->removeElement($subSubjectsTeacher);
         }
 
         return $this;
