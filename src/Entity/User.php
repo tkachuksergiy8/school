@@ -62,6 +62,21 @@ class User extends BaseUser
         return $this->firstName . ' ' . $this->lastName;
     }
 
+    public function isTeacher()
+    {
+        return in_array('ROLE_TEACHER', $this->roles);
+    }
+
+    public function idStudent()
+    {
+        return in_array('ROLE_STUDENT', $this->roles);
+    }
+
+    public function isAdmin()
+    {
+        return in_array('ROLE_ADMIN', $this->roles);
+    }
+
     public function getRolesAsString($cutted = true)
     {
         if (!$cutted) {
