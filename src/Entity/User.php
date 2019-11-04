@@ -21,9 +21,9 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Teacher", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Teacher", mappedBy="user", cascade={"persist"})
      */
-    private $teachers;
+    private $teacher;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Student", mappedBy="user", cascade={"persist"})
@@ -53,7 +53,6 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->teachers = new ArrayCollection();
         $this->students = new ArrayCollection();
     }
 
@@ -91,37 +90,6 @@ class User extends BaseUser
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|Teacher[]
-     */
-    public function getTeachers(): Collection
-    {
-        return $this->teachers;
-    }
-
-    public function addTeacher(Teacher $teacher): self
-    {
-        if (!$this->teachers->contains($teacher)) {
-            $this->teachers[] = $teacher;
-            $teacher->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTeacher(Teacher $teacher): self
-    {
-        if ($this->teachers->contains($teacher)) {
-            $this->teachers->removeElement($teacher);
-            // set the owning side to null (unless already changed)
-            if ($teacher->getUser() === $this) {
-                $teacher->setUser(null);
-            }
-        }
-
-        return $this;
     }
 
     /**
@@ -199,6 +167,24 @@ class User extends BaseUser
     public function setAbout(?string $about): self
     {
         $this->about = $about;
+
+        return $this;
+    }
+
+    public function getTeacher(): ?Teacher
+    {
+        return $this->teacher;
+    }
+
+    public function setTeacher(?Teacher $teacher): self
+    {
+        $this->teacher = $teacher;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newUser = $teacher === null ? null : $this;
+        if ($newUser !== $teacher->getUser()) {
+            $teacher->setUser($newUser);
+        }
 
         return $this;
     }

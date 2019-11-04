@@ -20,7 +20,7 @@ class Teacher
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="teachers")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="teacher", cascade="all")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
