@@ -17,5 +17,52 @@
 {% endblock %}
 
 {% block body %}
-{{ form(form) }}
+    {{ form_start(form) }}
+    <div class="form-group">
+        {% if form.vars.value.user.photo is not null %}
+            <img src="{{ asset(form.vars.value.user.photo|imagine_filter('avatar')) }}" alt="user avatar" title="user avatar" class="mb-2"/>
+        {% endif %}
+        {{ form_row(form.profile.photo) }}
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_row(form.profile.firstName) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="form-group">
+                    {{ form_row(form.profile.lastName) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.profile.about) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.yearsOfExperience, {attr:{'class':'form-control form-control-lg'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.mainSubjects, {attr:{'class':'form-control form-control-lg'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.subSubjects, {attr:{'class':'form-control form-control-lg'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.achievements, {attr:{'class':'form-control form-control-lg'}}) }}
+    </div>
+
+    <div class="form-group action">
+        <button type="submit" class="btn btn-lg btn-primary">Save</button>
+        <a href="{{ path('show_teacher_profile') }}" class="btn btn-lg btn-light">cancel</a>
+    </div>
+
 {% endblock %}
