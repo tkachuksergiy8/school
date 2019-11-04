@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block breadcrumbs %}
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ path('teacher') }}">Dashboard{% dump(app.user.id) %}</a>
+        </li>
+        <li class="breadcrumb-item active">My profile</li>
+    </ol>
+
+{% endblock %}
+
+{% block sidebar %}
+    {% include "teacher/_sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+<div class="page-header bordered">
+    <h1>Manage your public profile</h1>
+</div>
+{% if user.photo %}
+    <img src="{{ asset(user.photo|imagine_filter('avatar')) }}" alt="{{ user }}" title="{{ user }}" class="mb-2"/>
+{% endif %}
+<p><strong>Username:</strong> {{ user.username }}</p>
+<p><strong>Email:</strong> {{ user.email }}</p>
+<p><strong>First name:</strong> {{ user.firstName }}</p>
+<p><strong>Last name:</strong> {{ user.lastName }}</p>
+<p><strong>About:</strong> {{ user.about }}</p>
+<p><strong>Years of experience:</strong> {{ user.getTeacher.yearsOfExperience }}</p>
+<p><strong>Main subjects:</strong> {{ subjects.mainSubject }}</p>
+<p><strong>Subsidiary subjects:</strong> {{ subjects.subSubject }}</p>
+<p><strong>Key achievements in students results:</strong> {{ user.getTeacher.achievements }}</p>
+
+<a href="{{ path('teacher_profile') }}" class="btn btn-lg btn-primary">Edit profile</a>
+{% endblock %}
