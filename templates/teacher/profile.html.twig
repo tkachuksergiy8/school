@@ -18,11 +18,19 @@
 
 {% block body %}
     {{ form_start(form) }}
+    {{ form_errors(form) }}
     <div class="form-group">
         {% if form.vars.value.user.photo is not null %}
             <img src="{{ asset(form.vars.value.user.photo|imagine_filter('avatar')) }}" alt="user avatar" title="user avatar" class="mb-2"/>
         {% endif %}
         {{ form_row(form.profile.photo) }}
+
+        <input type="button" id="webcamButton" value="Take a photo">
+        <div class="booth" style="display: none;" id="booth">
+            <video id="video" width="400" height="300"></video>
+            <button type="button" id="capture">Take a photo</button>
+            <canvas id="canvas" width="400" height="300"></canvas>
+        </div>
     </div>
 
     <div class="row">
@@ -51,11 +59,11 @@
     <div class="form-group">
         {{ form_row(form.mainSubjects, {attr:{'class':'form-control form-control-lg'}}) }}
     </div>
-
+{% if form.subSubjects is defined %}
     <div class="form-group">
         {{ form_row(form.subSubjects, {attr:{'class':'form-control form-control-lg'}}) }}
     </div>
-
+{% endif %}
     <div class="form-group">
         {{ form_row(form.achievements, {attr:{'class':'form-control form-control-lg'}}) }}
     </div>
@@ -64,5 +72,7 @@
         <button type="submit" class="btn btn-lg btn-primary">Save</button>
         <a href="{{ path('show_teacher_profile') }}" class="btn btn-lg btn-light">cancel</a>
     </div>
-
+    {{ form_row(form.profile.base64_photo) }}
+    {{ form_row(form._token) }}
+    {{ form_end(form, {render_rest:false}) }}
 {% endblock %}

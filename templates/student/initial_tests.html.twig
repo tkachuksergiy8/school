@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}Initial tests{% endblock %}
+
+{% block breadcrumbs %}
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Initial tests</li>
+    </ol>
+{% endblock %}
+
+{% block sidebar %}
+    {% include "student/_sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+    <h1>Initial tests</h1>
+    <hr>
+    <ul>
+        {% for test in tests%}
+            <li><a href="{{ path('student_initial_assessment', {id: test.id}) }}">{{ test.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
