@@ -4,10 +4,7 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\{
-    TextType,
-    TextareaType
-};
+use Symfony\Component\Form\Extension\Core\Type\{HiddenType, TextType, TextareaType};
 use FOS\UserBundle\Form\Type\ProfileFormType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -47,6 +44,10 @@ class ProfileType extends AbstractType
                     'attr' => [
                         'class' => 'form-control form-control-lg text-editor'
                     ]
+                ])
+                ->add('base64_photo', HiddenType::class, [
+                    'required' => false,
+                    'mapped' => null
                 ])
         ;
     }

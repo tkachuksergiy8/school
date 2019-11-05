@@ -5,6 +5,7 @@ namespace App\Form;
 
 use App\Entity\Subject;
 use App\Entity\Teacher;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -47,12 +48,6 @@ class TeacherType extends AbstractType
                     'class' => 'form-control form-control-lg'
                 ]
             ])
-            ->add('subSubjects', null, [
-                'by_reference' => false,
-                'attr' => [
-                    'class' => 'form-control form-control-lg'
-                ]
-            ])
             ->add('achievements', TextareaType::class, [
                 'required' => true,
                 'attr' => [
@@ -60,6 +55,27 @@ class TeacherType extends AbstractType
                 ]
             ])
         ;
+
+        if(!$this->user->getTeacher()->getMainSubjects()->isEmpty()) {
+            $ms = $this->user->getTeacher()->getMainSubjects();
+
+            $builder->add('subSubjects', EntityType::class, [
+                'by_reference' => false,
+                'multiple' => true,
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control form-control-lg'
+                ],
+                'class' => Subject::class,
+                'query_builder' => function (EntityRepository $er) use($ms){
+                    $qb = $er->createQueryBuilder('s');
+
+                    return $qb->where(
+                        $qb->expr()->notIn('s.title' , $ms->toArray())
+                    );
+                }
+            ]);
+        }
 
         $builder
             ->get('profile')
