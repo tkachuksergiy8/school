@@ -34,10 +34,24 @@ class TeacherController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted() && $form->isValid()) {
+            $base64Image = $form->get('profile')->get('base64_photo')->getData();
+
+            if (!empty($base64Image)) {
+                $savePath = $this->getParameter('user_profile_photos');
+                $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64Image));
+                $fileName = md5(uniqid()) . '.png';
+                file_put_contents($savePath.'/'.$fileName, $data);
+                $this->getUser()->setPhoto($fileName);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($teacher);
             $em->flush();
+
+            if($teacher->getSubSubjects()->isEmpty()){
+                return $this->redirectToRoute('teacher_profile');
+            }
 
             return $this->redirectToRoute('show_teacher_profile');
         }

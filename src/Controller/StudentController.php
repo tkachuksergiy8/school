@@ -29,39 +29,14 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("initial-assessment", name="student_initial_assessment")
+     * @Route("initial-tests", name="student_initial_tests")
      */
-    public function initialAssessment(Request $request, InitialTestRepository $testRepo, StudentRepository $studentRepo, TestService $testService): Response
+    public function initialTests(InitialTestRepository $testRepo): Response
     {
-        $questions = array();
+        $tests = $testRepo->findAll();
 
-        foreach ($testRepo->findAll() as $item) {
-            $values = $item->getQuestions();
-            array_push($questions, ...$values);
-        }
-
-        $student = $studentRepo->findOneBy(['user' => $this->getUser()]);
-
-        if (!$student) {
-            return new Response('You are not student');
-        }
-
-        if ($request->request->has('test')) {
-            if (!$this->isCsrfTokenValid('initial-test', $request->get('token'))) {
-                return new Response('You are the bot');
-            }
-
-            $result = $testService->getResult($questions, $request->get('test'));
-            $student->setInitialAssessment($result);
-            $student->setInitialAnswers(serialize($request->get('test')));
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('student_initial_assessment');
-        }
-
-        return $this->render('student/initial_assessment.html.twig', [
-            'questions' => $questions,
-            'student' => $student
+        return $this->render('student/initial_tests.html.twig', [
+            'tests' => $tests
         ]);
     }
 
@@ -107,4 +82,36 @@ class StudentController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("initial-assessment/{id<\d+>}", name="student_initial_assessment")
+     */
+    public function initialAssessment(int $id, Request $request, InitialTestRepository $testRepo, StudentRepository $studentRepo, TestService $testService): Response
+    {
+
+        $questions = $testRepo->find($id)->getQuestions()->getValues();
+
+        $student = $studentRepo->findOneBy(['user' => $this->getUser()]);
+
+        if (!$student) {
+            return new Response('You are not student');
+        }
+
+        if ($request->request->has('test')) {
+            if (!$this->isCsrfTokenValid('initial-test', $request->get('token'))) {
+                return new Response('You are the bot');
+            }
+
+            $result = $testService->getResult($questions, $request->get('test'));
+            $student->setInitialAssessment($result);
+            $student->setInitialAnswers(serialize($request->get('test')));
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('student_initial_assessment', ['id' => $id]);
+        }
+
+        return $this->render('student/initial_assessment.html.twig', [
+            'questions' => $questions,
+            'student' => $student
+        ]);
+    }
 }
