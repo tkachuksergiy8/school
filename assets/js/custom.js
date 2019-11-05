@@ -42,3 +42,49 @@
 $(document).ready(function () {
     $('#dataTable').DataTable();
 });
+
+(function () {
+    var webcamButton = document.getElementById('webcamButton');
+
+    if (webcamButton) {
+        var booth = document.getElementById('booth'),
+            video = document.getElementById('video'),
+            canvas = document.getElementById('canvas'),
+            context = canvas.getContext('2d'),
+            photo = document.getElementById('teacher_profile_base64_photo'),
+            vendorUrl = window.URL || window.webkitURL;
+
+        webcamButton.addEventListener('click', function () {
+            if (webcamButton.getAttribute('value') === 'Take a photo') {
+                webcamButton.setAttribute('value', 'Close');
+                booth.style.display = 'block';
+
+
+                navigator.getMedia = navigator.getUserMedia ||
+                    navigator.webkitGetUserMedia ||
+                    navigator.mozGetUserMedia ||
+                    navigator.msGetUserMedia;
+
+                navigator.getMedia({
+                    video: true,
+                    audio: false
+                }, function (stream) {
+                    video.src = vendorUrl.createObjectURL(stream);
+                    video.play();
+                }, function (error) {
+
+                });
+
+                document.getElementById('capture').addEventListener('click', function () {
+                    context.drawImage(video, 0, 0, 400, 300);
+                    photo.setAttribute('value', canvas.toDataURL('img/png'));
+                })
+            } else {
+                webcamButton.setAttribute('value', 'Take a photo');
+                booth.style.display = 'none';
+                photo.setAttribute('value', '');
+            }
+        });
+    }
+})();
+
