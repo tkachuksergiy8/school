@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\{
     Request
 };
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use App\Repository\{InitialTestRepository, TestRepository, SessionRepository, StudentRepository};
+use App\Repository\{InitialTestRepository, SubjectRepository, TestRepository, SessionRepository, StudentRepository};
 use App\Entity\Test;
 use App\Service\TestService;
 
@@ -31,9 +31,25 @@ class StudentController extends AbstractController
     /**
      * @Route("initial-tests", name="student_initial_tests")
      */
-    public function initialTests(InitialTestRepository $testRepo): Response
+    public function initialTests(InitialTestRepository $testRepo, StudentRepository $studentRepo, SubjectRepository $subjectRepo): Response
     {
-        $tests = $testRepo->findAll();
+        $student = $studentRepo->findOneBy(['user' => $this->getUser()]);
+
+        $selectedSubjects = array_map(function ($item) {
+            return $item->getId();
+        }, $student->getCompletedInitialSubjects()->getValues());
+
+        $allSubjectsId = array_map(function ($item) {
+            return $item->getId();
+        }, $subjectRepo->findAll());
+
+        $tests = $testRepo->findBy([
+            'subject' => array_diff($allSubjectsId, $selectedSubjects)
+        ]);
+
+        if (!$student) {
+            return new Response('You are not student');
+        }
 
         return $this->render('student/initial_tests.html.twig', [
             'tests' => $tests
@@ -85,12 +101,14 @@ class StudentController extends AbstractController
     /**
      * @Route("initial-assessment/{id<\d+>}", name="student_initial_assessment")
      */
-    public function initialAssessment(int $id, Request $request, InitialTestRepository $testRepo, StudentRepository $studentRepo, TestService $testService): Response
+    public function initialAssessment(int $id, Request $request, InitialTestRepository $initialTestRepo, StudentRepository $studentRepo, TestService $testService): Response
     {
-
-        $questions = $testRepo->find($id)->getQuestions()->getValues();
+        if (isset($studentRepo->findOneBy(['user' => $this->getUser()])->getInitialAnswers()[$id])) {
+            return $this->redirectToRoute('student_initial_tests');
+        }
 
         $student = $studentRepo->findOneBy(['user' => $this->getUser()]);
+        $questions = $initialTestRepo->find($id)->getQuestions()->getValues();
 
         if (!$student) {
             return new Response('You are not student');
@@ -101,12 +119,19 @@ class StudentController extends AbstractController
                 return new Response('You are the bot');
             }
 
-            $result = $testService->getResult($questions, $request->get('test'));
-            $student->setInitialAssessment($result);
-            $student->setInitialAnswers(serialize($request->get('test')));
+            $initialAnswers = array();
+
+            if (!empty($student->getInitialAnswers())) {
+                $initialAnswers = $student->getInitialAnswers();
+            }
+
+            $initialAnswers[$id] = $testService->getTestAnswers($questions,  $request->get('test'), $id);
+            $student->setInitialAnswers($initialAnswers);
+            $student->addCompletedInitialSubject($initialTestRepo->find($id)->getSubject());
+
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('student_initial_assessment', ['id' => $id]);
+            return $this->redirectToRoute('student_initial_tests');
         }
 
         return $this->render('student/initial_assessment.html.twig', [
