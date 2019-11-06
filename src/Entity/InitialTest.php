@@ -28,6 +28,12 @@ class InitialTest
      */
     private $questions;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Subject", inversedBy="initialTests")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $subject;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -77,6 +83,18 @@ class InitialTest
                 $question->setInitialTest(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSubject(): ?Subject
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(?Subject $subject): self
+    {
+        $this->subject = $subject;
 
         return $this;
     }

@@ -26,12 +26,7 @@ class Student
     private $user;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $initialAssessment;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="array", nullable=true)
      */
     private $initialAnswers;
 
@@ -52,11 +47,18 @@ class Student
      */
     private $sessions;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Subject")
+     * @ORM\JoinTable(name="completed_initial_subjects")
+     */
+    private $completedInitialSubjects;
+
     public function __construct()
     {
         $this->buyedSessions = new ArrayCollection();
         $this->completedSessions = new ArrayCollection();
         $this->sessions = new ArrayCollection();
+        $this->completedInitialSubjects = new ArrayCollection();
     }
 
     public function __toString()
@@ -77,18 +79,6 @@ class Student
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getInitialAssessment(): ?int
-    {
-        return $this->initialAssessment;
-    }
-
-    public function setInitialAssessment(?int $initialAssessment): self
-    {
-        $this->initialAssessment = $initialAssessment;
 
         return $this;
     }
@@ -176,14 +166,40 @@ class Student
         return $this;
     }
 
-    public function getInitialAnswers(): ?string
+    public function getInitialAnswers(): ?array
     {
         return $this->initialAnswers;
     }
 
-    public function setInitialAnswers(?string $initialAnswers): self
+    public function setInitialAnswers(?array $initialAnswers): self
     {
         $this->initialAnswers = $initialAnswers;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subject[]
+     */
+    public function getCompletedInitialSubjects(): Collection
+    {
+        return $this->completedInitialSubjects;
+    }
+
+    public function addCompletedInitialSubject(Subject $completedInitialSubject): self
+    {
+        if (!$this->completedInitialSubjects->contains($completedInitialSubject)) {
+            $this->completedInitialSubjects[] = $completedInitialSubject;
+        }
+
+        return $this;
+    }
+
+    public function removeCompletedInitialSubject(Subject $completedInitialSubject): self
+    {
+        if ($this->completedInitialSubjects->contains($completedInitialSubject)) {
+            $this->completedInitialSubjects->removeElement($completedInitialSubject);
+        }
 
         return $this;
     }

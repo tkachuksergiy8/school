@@ -39,12 +39,18 @@ class Subject
      */
     private $subSubjectsTeachers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\InitialTest", mappedBy="subject")
+     */
+    private $initialTests;
+
     public function __construct()
     {
         $this->lessons = new ArrayCollection();
         $this->teachers = new ArrayCollection();
         $this->mainSubjectsTeachers = new ArrayCollection();
         $this->subSubjectsTeachers = new ArrayCollection();
+        $this->initialTests = new ArrayCollection();
     }
 
     public function __toString()
@@ -147,6 +153,37 @@ class Subject
     {
         if ($this->subSubjectsTeachers->contains($subSubjectsTeacher)) {
             $this->subSubjectsTeachers->removeElement($subSubjectsTeacher);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|InitialTest[]
+     */
+    public function getInitialTests(): Collection
+    {
+        return $this->initialTests;
+    }
+
+    public function addInitialTest(InitialTest $initialTest): self
+    {
+        if (!$this->initialTests->contains($initialTest)) {
+            $this->initialTests[] = $initialTest;
+            $initialTest->setSubject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInitialTest(InitialTest $initialTest): self
+    {
+        if ($this->initialTests->contains($initialTest)) {
+            $this->initialTests->removeElement($initialTest);
+            // set the owning side to null (unless already changed)
+            if ($initialTest->getSubject() === $this) {
+                $initialTest->setSubject(null);
+            }
         }
 
         return $this;
