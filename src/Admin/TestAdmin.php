@@ -20,7 +20,9 @@ class TestAdmin extends AbstractAdmin
     {
         $test = $this->getSubject();
 
-        $formMapper->add('title');
+        $formMapper
+                ->add('title')
+                ->add('subject');
 
         if ($test->getId()) {
             if ($test instanceof SessionTest) {
