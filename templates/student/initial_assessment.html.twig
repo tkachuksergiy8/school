@@ -19,10 +19,6 @@
 {% block body %}
     <h1>Initial assessment</h1>
     <hr>
-
-    {% if student.initialAssessment %}
-        <p>On the Initial assessment you scored {{ student.initialAssessment }} points</p>
-    {% else %}
         <form method="post" name="test">
             {% for question in questions %}
                 <fieldset class="form-group">
@@ -48,5 +44,4 @@
                 </div>
             </div>
         </form>
-    {% endif %}
 {% endblock %}
